@@ -3,45 +3,30 @@ import scrapy
 import re
 import datetime
 import newspaper
+import redis
 from DistributedCrawl.items import TenderItem
 from scrapy_redis.spiders import RedisSpider
+from scrapy_redis import connection
 from scrapy.conf import settings
 
 
-class GxzfcgSpider(RedisSpider):
-    name = "gxzfcg"
-    # allowed_domains = ["dmoz.org"]
-    start_urls = [
-        # "http://www.gxzfcg.gov.cn/CmsNewsController/recommendBulletinList/channelCode-cgxx/20/page_1.html"
-        ]
+class GxzfcgFactorySpider(RedisSpider):
+    name = "gxzfcg_spider"
+    name_pre = 'gxzfcg'
+    redis_server = connection.from_settings(settings)
 
     def parse(self, response):
-        level_xpaths = [
-            "//*[@id=\"bodyMain\"]/div/aside/div/nav/ul/li[1]/ul/li",
-            "//*[@id=\"bodyMain\"]/div/aside/div/nav/ul/li[2]/ul/li"
-        ]
-        level_names = [
-            "区本级采购",
-            "市(县)级采购"
-        ]
-        i = 0
-        for level_xpath in level_xpaths:
-            level_name = level_names[i]
-            i += 1
-            ul = response.xpath(level_xpath)
-            for li in ul:
-                item = TenderItem()
-                item['node_name'] = settings['NODE_NAME']
-                item['website'] = '广西壮族自治区政府采购网'
-                item['level'] = level_name
-                item['type'] = li.xpath("a/text()").extract()[0]
-                next_page_url = 'http://www.gxzfcg.gov.cn' + li.xpath("a/@href").extract()[0]
-                yield scrapy.Request(next_page_url, callback=self.parse_news, meta={'item': item})
-
-    def parse_news(self, response):
-        item = response.meta['item']
+        node_name_pre = settings['NODE_NAME']
+        website_pre = '广西壮族自治区政府采购网'
+        level_pre = response.xpath('//*[@id="channelBody"]/div[1]/a[2]/text()').extract()[0]
+        typr_pre = response.xpath('//*[@id="channelBody"]/div[1]/a[3]/text()').extract()[0]
         ul = response.xpath("//*[@id=\"channelBody\"]/div[2]/ul/li")
         for li in ul:
+            item = TenderItem()
+            item['node_name'] = node_name_pre
+            item['website'] = website_pre
+            item['level'] = level_pre
+            item['type'] = typr_pre
             item['title'] = li.xpath("a/@title").extract()[0]
             item['date'] = li.xpath("span[@class=\"date\"]/text()").extract()[0]
             item['url'] = 'http://www.gxzfcg.gov.cn' + li.xpath("a/@href").extract()[0]
@@ -57,11 +42,3 @@ class GxzfcgSpider(RedisSpider):
             item['update_time'] = now_time
             # print(item)
             yield item
-        # 下一页
-        if len(response.xpath("//*[@id=\"QuotaList_next\"]")) > 0:
-            num_str = re.search('page_(.*?).html', response.url).group(1)
-            num = int(num_str) + 1
-            next_page_url = re.sub('page_(.*?).html', 'page_' + str(num) + '.html', response.url)
-            print(next_page_url)
-        if next_page_url:
-            yield scrapy.Request(next_page_url, callback=self.parse_news)
