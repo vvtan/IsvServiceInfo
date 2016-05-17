@@ -1,14 +1,18 @@
+# -*- coding: utf-8 -*-
 import scrapy
 import re
+import datetime
 import newspaper
 from DistributedCrawl.items import TenderItem
+from scrapy_redis.spiders import RedisSpider
+from scrapy.conf import settings
 
 
-class GxzfcgSpider(scrapy.spiders.Spider):
+class GxzfcgSpider(RedisSpider):
     name = "gxzfcg"
     # allowed_domains = ["dmoz.org"]
     start_urls = [
-        "http://www.gxzfcg.gov.cn/CmsNewsController/recommendBulletinList/channelCode-cgxx/20/page_1.html"
+        # "http://www.gxzfcg.gov.cn/CmsNewsController/recommendBulletinList/channelCode-cgxx/20/page_1.html"
         ]
 
     def parse(self, response):
@@ -27,13 +31,14 @@ class GxzfcgSpider(scrapy.spiders.Spider):
             ul = response.xpath(level_xpath)
             for li in ul:
                 item = TenderItem()
+                item['node_name'] = settings['NODE_NAME']
                 item['website'] = '广西壮族自治区政府采购网'
                 item['level'] = level_name
                 item['type'] = li.xpath("a/text()").extract()[0]
                 next_page_url = 'http://www.gxzfcg.gov.cn' + li.xpath("a/@href").extract()[0]
-                yield scrapy.Request(next_page_url, callback=self.parse_news, meta={'item':item})
+                yield scrapy.Request(next_page_url, callback=self.parse_news, meta={'item': item})
 
-    def parse_news(self,response):
+    def parse_news(self, response):
         item = response.meta['item']
         ul = response.xpath("//*[@id=\"channelBody\"]/div[2]/ul/li")
         for li in ul:
@@ -46,6 +51,10 @@ class GxzfcgSpider(scrapy.spiders.Spider):
             article.download()
             article.parse()
             item['content'] = article.text
+            # 生成时间
+            now_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            item['add_time'] = now_time
+            item['update_time'] = now_time
             # print(item)
             yield item
         # 下一页

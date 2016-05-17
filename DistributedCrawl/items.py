@@ -11,6 +11,9 @@ import scrapy
 class TenderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    node_name = scrapy.Field()
+    add_time = scrapy.Field()
+    update_time = scrapy.Field()
     website = scrapy.Field()
     level = scrapy.Field()
     type = scrapy.Field()

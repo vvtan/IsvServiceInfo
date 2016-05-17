@@ -6,16 +6,21 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
+from scrapy.conf import settings
 
 
 class DistributedcrawlPipeline(object):
     def __init__(self):
-        self.connection = pymongo.MongoClient()
+        host = settings['MONGODB_HOST']
+        port = settings['MONGODB_PORT']
+        dbName = settings['MONGODB_DBNAME']
+        client = pymongo.MongoClient(host=host, port=port)
+        tdb = client[dbName]
+        self.post = tdb[settings['MONGODB_DOCNAME']]
 
     def process_item(self, item, spider):
-        tender = self.connection.TenderInfo.tender
-        tender.insert(dict(item))
-        print('已爬取条数:' + str(tender.count()))
+        self.post.insert(dict(item))
+        print('已爬取条数:' + str(self.post.count()))
         return item
 
 
