@@ -101,7 +101,7 @@ SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
 # REDIS_HOST = 'localhost'
 # REDIS_PORT = 6379
 
-REDIS_URL = os.getenv('REDIS_URL')
+REDIS_URL = 'redis://admin:mc2015@172.16.1.5:6379'
 
 
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
