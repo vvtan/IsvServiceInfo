@@ -8,15 +8,16 @@
 import psycopg2
 from scrapy.conf import settings
 import re
+import os
 
 
 class IsvServiceInfoPipeline(object):
     def __init__(self):
-        self.host = settings['POSTGRESQL_HOST']
-        self.port = settings['POSTGRESQL_PORT']
-        self.user = settings['POSTGRESQL_USER']
-        self.password = settings['POSTGRESQL_PASSWORD']
-        self.database = settings['POSTGRESQL_DATABASE']
+        self.host = os.getenv('POSTGRESQL_HOST')
+        self.port = os.getenv('POSTGRESQL_PORT')
+        self.user = os.getenv('POSTGRESQL_USER')
+        self.password = os.getenv('POSTGRESQL_PASSWORD')
+        self.database = os.getenv('POSTGRESQL_DATABASE')
 
     def process_item(self, item, spider):
         add_time = item['add_time']

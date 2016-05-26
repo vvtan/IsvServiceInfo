@@ -24,8 +24,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IsvServiceInfo/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="103" column="23" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
+            <state relative-caret-position="699">
+              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -43,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scrapy.cfg" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scrapy.cfg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapy.cfg">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
@@ -113,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IsvServiceInfo/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="378">
+              <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
               <folding>
                 <element signature="e#193#208#0" expanded="true" />
               </folding>
@@ -139,10 +139,10 @@
       <list>
         <option value="$PROJECT_DIR$/IsvServiceInfo/spiders/Isv_service_info_spider.py" />
         <option value="$PROJECT_DIR$/IsvServiceInfo/items.py" />
-        <option value="$PROJECT_DIR$/IsvServiceInfo/settings.py" />
         <option value="$PROJECT_DIR$/IsvServiceInfo/url_factory.py" />
         <option value="$PROJECT_DIR$/IsvServiceInfo/spiders/IsvServiceInfoSpider.py" />
         <option value="$PROJECT_DIR$/scrapy.cfg" />
+        <option value="$PROJECT_DIR$/IsvServiceInfo/settings.py" />
         <option value="$PROJECT_DIR$/IsvServiceInfo/pipelines.py" />
       </list>
     </option>
@@ -506,30 +506,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IsvServiceInfo/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="103" column="23" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IsvServiceInfo/spiders/IsvServiceInfoSpider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="28" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IsvServiceInfo/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#193#208#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -587,6 +569,24 @@
         <state relative-caret-position="231">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IsvServiceInfo/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="699">
+          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IsvServiceInfo/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+          <folding>
+            <element signature="e#193#208#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
