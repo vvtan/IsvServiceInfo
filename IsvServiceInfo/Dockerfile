@@ -6,12 +6,10 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 
-
-RUN pip install scrapy-redis
-RUN cd /usr/src/app/IsvServiceInfo
+RUN cd /usr/src/app/IsvServiceInfo/IsvServiceInfo
 
 EXPOSE 6800
 
-ENTRYPOINT  ["scrapy","crawl","isv_service_info"]
+ENTRYPOINT  [""]
 
 

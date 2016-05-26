@@ -4,3 +4,4 @@ scrapy==1.0.0
 pymongo
 psycopg2
 redis
+scrapy-redis
