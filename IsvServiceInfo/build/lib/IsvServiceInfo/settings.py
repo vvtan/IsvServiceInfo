@@ -108,8 +108,3 @@ DOWNLOADER_MIDDLEWARES = {
     'IsvServiceInfo.rotate_useragent.RotateUserAgentMiddleware': 400
 }
 
-POSTGRESQL_HOST = '172.16.2.3'
-POSTGRESQL_PORT = 5432
-POSTGRESQL_USER = 'seller_info'
-POSTGRESQL_PASSWORD = 'mc2016'
-POSTGRESQL_DATABASE = 'analysis'
