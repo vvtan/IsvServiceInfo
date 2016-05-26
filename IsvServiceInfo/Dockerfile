@@ -6,10 +6,11 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 
-RUN cd /usr/src/app/IsvServiceInfo
+RUN cd /usr/src/app/IsvServiceInfo && \
+        chmod 777 ./run.sh
 
 EXPOSE 6800
 
-ENTRYPOINT  [""]
+ENTRYPOINT  ["./run.sh"]
 
 
