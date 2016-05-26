@@ -5,6 +5,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
+RUN apt-get update
+
 RUN apt-get -y install redis-server && \
       /usr/bin/redis-server
 
