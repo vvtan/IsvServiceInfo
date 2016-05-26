@@ -1,0 +1,14 @@
+setup.py
+IsvServiceInfo/__init__.py
+IsvServiceInfo/items.py
+IsvServiceInfo/pipelines.py
+IsvServiceInfo/rotate_useragent.py
+IsvServiceInfo/settings.py
+IsvServiceInfo/url_factory.py
+IsvServiceInfo/spiders/IsvServiceInfoSpider.py
+IsvServiceInfo/spiders/__init__.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
