@@ -7,12 +7,13 @@ COPY . /usr/src/app
 
 RUN apt-get update
 
-RUN apt-get -y install redis-server && \
-      /usr/bin/redis-server
+RUN apt-get -y install redis-server
 
 RUN cd /usr/src/app/IsvServiceInfo && \
         scrapy crawl isv_service_info
 
 EXPOSE 6800
+
+ENTRYPOINT  ["/usr/bin/redis-server"]
 
 
