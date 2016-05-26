@@ -5,7 +5,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
-RUN pip install scrapy-redis
+RUN apt-get -y install redis-server && \
+      /usr/bin/redis-server
 
 RUN cd /usr/src/app/IsvServiceInfo && \
         scrapy crawl isv_service_info
