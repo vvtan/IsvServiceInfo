@@ -14,10 +14,10 @@ RUN pip install scrapy-redis
 
 RUN cd /usr/src/app/IsvServiceInfo
 
-RUN chmod 777 ./run.sh
+RUN chmod 777 run.sh
 
 EXPOSE 6800
 
-ENTRYPOINT  ["./run.sh"]
+ENTRYPOINT  ["run.sh"]
 
 
