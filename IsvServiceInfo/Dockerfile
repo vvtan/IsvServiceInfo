@@ -13,10 +13,10 @@ RUN apt-get -y install redis-server
 RUN pip install scrapy-redis
 
 RUN cd /usr/src/app/IsvServiceInfo && \
-        chmod 777 ./run.sh
+        chmod 777 ./IsvServiceInfo/run.sh
 
 EXPOSE 6800
 
-ENTRYPOINT  ["./run.sh"]
+ENTRYPOINT  ["./IsvServiceInfo/run.sh"]
 
 
