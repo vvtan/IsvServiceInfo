@@ -7,6 +7,10 @@ COPY . /usr/src/app
 
 
 
+RUN apt-get update
+
+RUN apt-get -y install redis-server
+
 RUN cd /usr/src/app/IsvServiceInfo
 
 EXPOSE 6800
