@@ -18,5 +18,5 @@ RUN chmod 777 run.sh
 
 EXPOSE 6800
 
-ENTRYPOINT  ["./run.sh"]
+ENTRYPOINT  ["scrapy","crawl","isv_service_info"]
 
