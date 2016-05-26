@@ -49,7 +49,6 @@ setuptools
 six
 tldextract
 Twisted
-vboxapi
 w3lib
 wheel
 zope.interface
