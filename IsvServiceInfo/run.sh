@@ -1,2 +1,2 @@
-/usr/bin/redis-server &
-scrapy crawl isv_service_info
+scrapy crawl isv_service_info &
+/usr/bin/redis-server

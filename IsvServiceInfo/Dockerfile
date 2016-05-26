@@ -7,11 +7,12 @@ COPY . /usr/src/app
 
 
 
+
 RUN cd /usr/src/app/IsvServiceInfo
 
 RUN chmod 777 run.sh
 
 EXPOSE 6800
 
-ENTRYPOINT  ["scrapy","crawl","isv_service_info"]
+ENTRYPOINT  ["./run.sh"]
 
