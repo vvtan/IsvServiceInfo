@@ -6,7 +6,6 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 RUN echo export /usr/bin/redis-server >> /etc/rc.local
-RUN echo export scrapy crawl isv_service_info >> /etc/rc.local
 
 
 RUN apt-get update
@@ -17,6 +16,6 @@ RUN cd /usr/src/app/IsvServiceInfo
 
 EXPOSE 6800
 
-ENTRYPOINT  ["/etc/rc.local"]
+ENTRYPOINT  ["scrapy crawl isv_service_info"]
 
 
