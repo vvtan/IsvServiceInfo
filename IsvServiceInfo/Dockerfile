@@ -7,8 +7,7 @@ COPY . /usr/src/app
 
 RUN chmod 777 run.sh
 
-RUN pip install -r requirements.txt &&\
-    cd /usr/src/app/IsvServiceInfo
+RUN cd /usr/src/app/IsvServiceInfo
 
 
 EXPOSE 6800

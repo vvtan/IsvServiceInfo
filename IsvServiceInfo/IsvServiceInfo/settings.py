@@ -93,7 +93,7 @@ ITEM_PIPELINES = {
 
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
-SCHEDULER_PERSIST = False
+SCHEDULER_PERSIST = True
 
 SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
 
