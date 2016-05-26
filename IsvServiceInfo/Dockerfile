@@ -1,4 +1,4 @@
-FROM python:2.7.11
+FROM python:2.7.8
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -6,6 +6,6 @@ COPY . /usr/src/app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 3000
+EXPOSE 6800
 
 CMD [ "bash"]
