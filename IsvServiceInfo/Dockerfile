@@ -1,4 +1,4 @@
-FROM daocloud.io/mingchuan/isv_service_info_crawler:master-1b70a38
+FROM python:2.7.11
 MAINTAINER vvtan
 
 RUN mkdir -p /usr/src/app
@@ -6,8 +6,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 RUN chmod 777 run.sh
-RUN pip install service_identity
-RUN pip install twisted libssl-dev libffi-dev
+RUN pip install -r requirements.txt
 RUN cd /usr/src/app/IsvServiceInfo
 
 
