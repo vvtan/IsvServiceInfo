@@ -21,11 +21,18 @@ class IsvServiceInfoSpider(RedisSpider):
         'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.CZ3Xrj&page_id=2489&isv_id=45632667&page_rank=2&tab_type=1',
         'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.Oquk72&page_id=678230&isv_id=877021141&page_rank=2&tab_type=1',
 
-'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.mSxKHl&page_id=25995&isv_id=305442977&page_rank=2&tab_type=1',
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.mSxKHl&page_id=25995&isv_id=305442977&page_rank=2&tab_type=1',
 
-'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.lH8xCC&page_id=172044&isv_id=570102268&page_rank=2&tab_type=1',
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.lH8xCC&page_id=172044&isv_id=570102268&page_rank=2&tab_type=1',
 
-'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.OzhuHM&page_id=690262&isv_id=897211958&page_rank=2&tab_type=1'
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.OzhuHM&page_id=690262&isv_id=897211958&page_rank=2&tab_type=1',
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.Oquk72&page_id=678230&isv_id=877021141&page_rank=2&tab_type=1',
+
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.mSxKHl&page_id=25995&isv_id=305442977&page_rank=2&tab_type=1',
+
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.lH8xCC&page_id=172044&isv_id=570102268&page_rank=2&tab_type=1',
+
+        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.OzhuHM&page_id=690262&isv_id=897211958&page_rank=2&tab_type=1'
         ]
     redis_server = connection.from_settings(settings)
 
