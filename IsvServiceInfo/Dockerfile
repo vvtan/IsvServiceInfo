@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 
-RUN cd /usr/src/app/IsvServiceInfo/IsvServiceInfo
+RUN cd /usr/src/app/IsvServiceInfo
 
 EXPOSE 6800
 
