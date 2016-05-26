@@ -7,6 +7,7 @@ COPY . /usr/src/app
 
 RUN chmod 777 run.sh
 RUN pip install service_identity
+RUN pip install twisted libssl-dev libffi-dev
 RUN cd /usr/src/app/IsvServiceInfo
 
 
