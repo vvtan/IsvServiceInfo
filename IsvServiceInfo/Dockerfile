@@ -12,6 +12,6 @@ RUN cd /usr/src/app/IsvServiceInfo
 
 EXPOSE 6800
 
-ENTRYPOINT  ["scrapy", "crawl", "isv_service_info"]
-CMD ["-s REDIS_URL=$REDIS_URL"]
+ENTRYPOINT  ["scrapy"]
+CMD ["crawl", "isv_service_info","-s REDIS_URL=$REDIS_URL"]
 
