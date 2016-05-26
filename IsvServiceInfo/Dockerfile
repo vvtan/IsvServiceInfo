@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 RUN chmod 777 run.sh
-
+RUN pip install service_identity
 RUN cd /usr/src/app/IsvServiceInfo
 
 

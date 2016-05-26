@@ -5,3 +5,4 @@ pymongo
 psycopg2
 redis
 scrapy-redis
+service_identity
