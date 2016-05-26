@@ -1,4 +1,4 @@
-FROM python:2.7.8
+FROM daocloud.io/mingchuan/isv_service_info_crawler:master-1b70a38
 MAINTAINER vvtan
 
 RUN mkdir -p /usr/src/app
