@@ -5,12 +5,11 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
-
-
+RUN chmod 777 run.sh
 
 RUN pip install -r requirements.txt &&\
-    cd /usr/src/app/IsvServiceInfo && \
-    chmod 777 run.sh
+    cd /usr/src/app/IsvServiceInfo
+
 
 EXPOSE 6800
 
