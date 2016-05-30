@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
-RUN pip insall codecs
+RUN pip install codecs
 RUN chmod 777 run.sh
 RUN cd /usr/src/app/IsvServiceInfo
 
