@@ -11,6 +11,5 @@ RUN cd /usr/src/app/IsvServiceInfo
 
 EXPOSE 6800
 
-ENTRYPOINT  ["scrapy"]
-CMD ["crawlall"]
+ENTRYPOINT  ["/run.sh"]
 

@@ -23,6 +23,7 @@ class IsvServiceInfoFactorySpider(RedisSpider):
     count = 0
 
     def parse(self, response):
+        self.count = 0
         self.redis_server.delete('isv_service_info:items')
         self.redis_server.delete('isv_service_info:dupefilter')
         self.redis_server.delete('isv_service_info:start_urls')
@@ -34,9 +35,8 @@ class IsvServiceInfoFactorySpider(RedisSpider):
         f.close()
 
     def generate_url(self, service_code):
-        self.count = 0
         # 随机休眠0~1秒
-        time.sleep(random.random())
+        time.sleep(random.random()*3)
         url = 'https://fuwu.taobao.com/ser/detail.html?service_code='
         url += service_code
         html = requests.get(url).text

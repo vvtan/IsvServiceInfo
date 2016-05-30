@@ -48,7 +48,7 @@ class IsvServiceInfoSpider(RedisSpider):
     def parse_detail(self, response):
         # 随机休眠0~1秒
         print response.url
-        time.sleep(random.random())
+        time.sleep(random.random()*3)
         detail_url = response.url
         service_code = re.search('service_code=(.*?)&', detail_url + '&').group(1)
         content = response.xpath('//*[@id="J_SKUForm"]/div[2]/text()')
