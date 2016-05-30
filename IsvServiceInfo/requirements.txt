@@ -1,6 +1,5 @@
 requests
 lxml
-codecs
 pymongo
 psycopg2
 redis
