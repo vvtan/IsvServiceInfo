@@ -9,6 +9,8 @@ import requests
 import re
 import datetime
 from lxml import etree
+import time
+import random
 import sys
 
 reload(sys)
@@ -18,42 +20,35 @@ sys.setdefaultencoding('utf-8')
 class IsvServiceInfoSpider(RedisSpider):
     name = "isv_service_info"
     start_urls = [
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.CZ3Xrj&page_id=2489&isv_id=45632667&page_rank=2&tab_type=1',
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.Oquk72&page_id=678230&isv_id=877021141&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.mSxKHl&page_id=25995&isv_id=305442977&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.lH8xCC&page_id=172044&isv_id=570102268&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.OzhuHM&page_id=690262&isv_id=897211958&page_rank=2&tab_type=1',
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.Oquk72&page_id=678230&isv_id=877021141&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.mSxKHl&page_id=25995&isv_id=305442977&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.lH8xCC&page_id=172044&isv_id=570102268&page_rank=2&tab_type=1',
-
-        'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.OzhuHM&page_id=690262&isv_id=897211958&page_rank=2&tab_type=1'
-        ]
+                ]
     redis_server = connection.from_settings(settings)
 
     def parse(self, response):
-        print response.url
+        # print response.url
         item = IsvServiceInfoItem()
-        isv_id = re.search('isv_id=(.*?)&', response.url + '&').group(1)
-        company_name = response.xpath('//*[@id="seller-header"]/div[1]/div/a/text()').extract()[0]
-        servers = response.xpath('//*[@id="searchForm"]/div[2]/table/tbody/tr')
-        for server in servers:
-            user_number = server.xpath('td[4]/text()').extract()[0]
-            browser_number = server.xpath('td[5]/text()').extract()[0]
-            item['isv_id'] = isv_id
-            item['company_name'] = company_name
-            item['user_number'] = user_number
-            item['browser_number'] = browser_number
-            detail_url = re.sub('service/service.htm', 'ser/detail.html', 'https:' + server.xpath('td[2]/dl/dt/a/@href').extract()[0])
-            yield scrapy.Request(detail_url, callback=self.parse_detail, meta={'item': item})
-            print detail_url
+        service_code = re.search('service_code=(.*?)&', response.url + '&')
+        if service_code:
+            yield scrapy.Request(response.url, callback=self.parse_detail, meta={'item': item})
+            print '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+        else:
+            isv_id = re.search('isv_id=(.*?)&', response.url + '&').group(1)
+            company_name = response.xpath('//*[@id="seller-header"]/div[1]/div/a/text()').extract()[0]
+            servers = response.xpath('//*[@id="searchForm"]/div[2]/table/tbody/tr')
+            for server in servers:
+                user_number = server.xpath('td[4]/text()').extract()[0]
+                browser_number = server.xpath('td[5]/text()').extract()[0]
+                item['isv_id'] = isv_id
+                item['company_name'] = company_name
+                item['user_number'] = user_number
+                item['browser_number'] = browser_number
+                detail_url = re.sub('service/service.htm', 'ser/detail.html', 'https:' + server.xpath('td[2]/dl/dt/a/@href').extract()[0])
+                yield scrapy.Request(detail_url, callback=self.parse_detail, meta={'item': item})
+                # print detail_url
 
     def parse_detail(self, response):
+        # 随机休眠0~1秒
+        print response.url
+        time.sleep(random.random())
         detail_url = response.url
         service_code = re.search('service_code=(.*?)&', detail_url + '&').group(1)
         content = response.xpath('//*[@id="J_SKUForm"]/div[2]/text()')
@@ -193,6 +188,9 @@ class IsvServiceInfoSpider(RedisSpider):
 
             now_time = datetime.datetime.today()
             item = response.meta['item']
+            # 防止没有公司服务列表只有服务详细页面
+            if not item:
+                item = IsvServiceInfoItem()
             item['add_time'] = now_time
             item['modify_time'] = now_time
             # item['isv_id'] = isv_id
