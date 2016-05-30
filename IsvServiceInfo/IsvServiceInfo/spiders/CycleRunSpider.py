@@ -25,13 +25,13 @@ class IsvServiceInfoFactorySpider(RedisSpider):
     redis_server = connection.from_settings(settings)
 
     def parse(self, response):
-        self.runTask(self.work, min=1)
+        self.runTask(self.work, second=60)
 
     def work(self):
         self.redis_server.lpush('isv_service_info_factory:start_urls', 'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.CZ3Xrj&page_id=2489&isv_id=45632667&page_rank=2&tab_type=1')
         print "更新周期到"
 
-    def runTask(self, func, day=0, hour=6, min=0, second=0):
+    def runTask(self, func, day=0, hour=0, min=0, second=0):
         # Init time
         now = datetime.now()
         strnow = now.strftime('%Y-%m-%d %H:%M:%S')
@@ -57,7 +57,7 @@ class IsvServiceInfoFactorySpider(RedisSpider):
                 # print "next_iter: %s" % strnext_time
                 # Continue next iteration
                 # 半小时检查一次
-                time.sleep(600)
+                time.sleep(10)
                 continue
 
         # runTask(work, min=0.5)

@@ -5,11 +5,12 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
-RUN chmod 777 run.sh
+RUN chmod 755 run.sh
 RUN cd /usr/src/app/IsvServiceInfo
 
 
 EXPOSE 6800
 
-ENTRYPOINT  ["./run.sh"]
+ENTRYPOINT  ["scrapy"]
+CMD ["crawlall"]
 
