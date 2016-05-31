@@ -7,6 +7,8 @@ COPY . /usr/src/app
 
 RUN chmod 755 run.sh
 RUN cd /usr/src/app/IsvServiceInfo
+RUN cp /etc/localtime /etc/localtime.bak
+RUN ln -svf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 
 EXPOSE 6800
