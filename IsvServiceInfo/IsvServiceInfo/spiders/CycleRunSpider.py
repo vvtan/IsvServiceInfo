@@ -25,7 +25,7 @@ class IsvServiceInfoFactorySpider(RedisSpider):
     redis_server = connection.from_settings(settings)
 
     def parse(self, response):
-        self.runTask(self.work, second=60)
+        self.runTask(self.work, hour=4)
 
     def work(self):
         self.redis_server.lpush('isv_service_info_factory:start_urls', 'https://fuwu.taobao.com/serv/shop_index.htm?spm=0.0.0.0.CZ3Xrj&page_id=2489&isv_id=45632667&page_rank=2&tab_type=1')
@@ -56,8 +56,8 @@ class IsvServiceInfoFactorySpider(RedisSpider):
                 strnext_time = iter_time.strftime('%Y-%m-%d %H:%M:%S')
                 # print "next_iter: %s" % strnext_time
                 # Continue next iteration
-                # 半小时检查一次
-                time.sleep(10)
+                # 1分钟检查一次
+                time.sleep(60)
                 continue
 
         # runTask(work, min=0.5)

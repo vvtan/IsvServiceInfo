@@ -35,8 +35,8 @@ class IsvServiceInfoPipeline(object):
         attitude_compare = self.delete_the_percent(item['attitude_compare'])
         stability_compare = self.delete_the_percent(item['stability_compare'])
         secure_score = self.delete_the_fen(item['secure_score'])
-        payer_number = str(item['payer_number']).strip()
-        nearly_payer_number = str(item['nearly_payer_number']).strip()
+        payer_number = self.get_payer_number(item['payer_number'])
+        nearly_payer_number = self.get_nearly_payer_number(item['nearly_payer_number'])
         continue_rate = self.delete_the_percent(item['continue_rate'])
         refund_rate = self.delete_the_percent(item['refund_rate'])
         open_rate = self.delete_the_percent(item['open_rate'])
@@ -88,7 +88,7 @@ class IsvServiceInfoPipeline(object):
         # print(company_name)
         # print(user_number)
         # print(browser_number)
-        print(service_name)
+        # print(service_name)
         # print(service_code)
         # print(score)
         # print(usability_compare)
@@ -133,4 +133,28 @@ class IsvServiceInfoPipeline(object):
             result = re.search('(.*)分', content)
         if result:
             return float(result.group(1))
+        return 0
+
+    def get_payer_number(self, content):
+        index = str(content).find('万')
+        if index != -1:
+            result = re.search('(.*)万', str(content).strip())
+            if result:
+                return int(float(result.group(1))*10000)
+        index = str(content).find('少于')
+        if index != -1:
+            result = re.search('少于(.*)', str(content).strip())
+            if result:
+                return int(result.group(1))
+        if str(content).find(',') != -1:
+            return int(str(content).replace(',', ''))
+        else:
+            return int(str(content))
+        return 0
+
+    def get_nearly_payer_number(self,content):
+        print str(content)
+        result = re.search('\(近30天(.*)\)', str(content).strip())
+        if result:
+            return self.get_payer_number(result.group(1))
         return 0

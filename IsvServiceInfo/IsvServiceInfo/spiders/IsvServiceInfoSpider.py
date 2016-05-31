@@ -101,88 +101,93 @@ class IsvServiceInfoSpider(RedisSpider):
             response.xpath('//*[@id="reviews"]/div[1]/div/div/div[3]/ul/li[4]/span[@class="tb-r-pecent"]/text()').extract()[0].replace('\t', '').replace('\n', '')
             one_score_rate = \
             response.xpath('//*[@id="reviews"]/div[1]/div/div/div[3]/ul/li[5]/span[@class="tb-r-pecent"]/text()').extract()[0].replace('\t', '').replace('\n', '')
-            seller_rank_percent_url = 'https://fuwu.taobao.com' + \
-                                      response.xpath('//*[@id="desc-log"]/div/div[1]/div[1]/h5/a/@href').extract()[0]
-            seller_industry_percent_url = 'https://fuwu.taobao.com' + \
-                                          response.xpath('//*[@id="desc-log"]/div/div[1]/div[2]/h5/a/@href').extract()[0]
-            # 爬淘宝买家等级占比
-            html = requests.get(seller_rank_percent_url).text
-            selector = etree.HTML(html)
-            seller_rank_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
-            seller_rank_percent = '['
-            for seller_rank_percent_tr in seller_rank_percent_trs:
-                seller_rank_percent_tds = seller_rank_percent_tr.xpath('td')
-                index = 0
-                for seller_rank_percent_td in seller_rank_percent_tds:
-                    index += 1
-                    img = seller_rank_percent_td.xpath('img/@src')
-                    if img:
-                        seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
-                    else:
-                        seller_rank = seller_rank_percent_td.xpath('text()')
-                        if seller_rank:
-                            seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
-                    if seller_rank:
-                        if index % 2 == 1:
-                            seller_rank_percent = seller_rank_percent + '{\"rank\":\"' + str(seller_rank).replace('\r',
-                                                                                                                  '') + '\",'
+            seller_rank_percent_url = response.xpath('//*[@id="desc-log"]/div/div[1]/div[1]/h5/a/@href')
+            if seller_rank_percent_url:
+                seller_rank_percent_url = 'https://fuwu.taobao.com' + seller_rank_percent_url.extract()[0]
+            seller_industry_percent_url = response.xpath('//*[@id="desc-log"]/div/div[1]/div[2]/h5/a/@href')
+            if seller_industry_percent_url:
+                seller_industry_percent_url = 'https://fuwu.taobao.com' + seller_industry_percent_url.extract()[0]
+                # 爬淘宝买家等级占比
+                html = requests.get(seller_rank_percent_url).text
+                selector = etree.HTML(html)
+                seller_rank_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
+                seller_rank_percent = '['
+                for seller_rank_percent_tr in seller_rank_percent_trs:
+                    seller_rank_percent_tds = seller_rank_percent_tr.xpath('td')
+                    index = 0
+                    for seller_rank_percent_td in seller_rank_percent_tds:
+                        index += 1
+                        img = seller_rank_percent_td.xpath('img/@src')
+                        if img:
+                            seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
                         else:
-                            seller_rank_percent = seller_rank_percent + '\"percent\":\"' + seller_rank + '\"},'
-
-            seller_rank_percent = seller_rank_percent[:-1] + ']'
-            # 爬卖家行业占比
-            html = requests.get(seller_industry_percent_url).text
-            selector = etree.HTML(html)
-            seller_industry_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
-            seller_industry_percent = '['
-            for seller_industry_percent_tr in seller_industry_percent_trs:
-                seller_industry_percent_tds = seller_industry_percent_tr.xpath('td')
-                index = 0
-                for seller_industry_percent_td in seller_industry_percent_tds:
-                    index += 1
-                    img = seller_industry_percent_td.xpath('img/@src')
-                    if img:
-                        seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
-                    else:
-                        seller_rank = seller_industry_percent_td.xpath('text()')
+                            seller_rank = seller_rank_percent_td.xpath('text()')
+                            if seller_rank:
+                                seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
                         if seller_rank:
-                            seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
-                    if seller_rank:
-                        if index % 2 == 1:
-                            seller_industry_percent = seller_industry_percent + '{\"industry\":\"' + str(
-                                seller_rank).replace(
-                                '\r', '') + '\",'
-                        else:
-                            seller_industry_percent = seller_industry_percent + '\"percent\":\"' + seller_rank + '\"},'
+                            if index % 2 == 1:
+                                seller_rank_percent = seller_rank_percent + '{\"rank\":\"' + str(seller_rank).replace('\r',
+                                                                                                                      '') + '\",'
+                            else:
+                                seller_rank_percent = seller_rank_percent + '\"percent\":\"' + seller_rank + '\"},'
 
-            seller_industry_percent = seller_industry_percent[:-1] + ']'
+                seller_rank_percent = seller_rank_percent[:-1] + ']'
+                # 爬卖家行业占比
+                html = requests.get(seller_industry_percent_url).text
+                selector = etree.HTML(html)
+                seller_industry_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
+                seller_industry_percent = '['
+                for seller_industry_percent_tr in seller_industry_percent_trs:
+                    seller_industry_percent_tds = seller_industry_percent_tr.xpath('td')
+                    index = 0
+                    for seller_industry_percent_td in seller_industry_percent_tds:
+                        index += 1
+                        img = seller_industry_percent_td.xpath('img/@src')
+                        if img:
+                            seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
+                        else:
+                            seller_rank = seller_industry_percent_td.xpath('text()')
+                            if seller_rank:
+                                seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
+                        if seller_rank:
+                            if index % 2 == 1:
+                                seller_industry_percent = seller_industry_percent + '{\"industry\":\"' + str(
+                                    seller_rank).replace(
+                                    '\r', '') + '\",'
+                            else:
+                                seller_industry_percent = seller_industry_percent + '\"percent\":\"' + seller_rank + '\"},'
+
+                seller_industry_percent = seller_industry_percent[:-1] + ']'
+            else:
+                seller_rank_percent = '[]'
+                seller_industry_percent = '[]'
 
             # print(company_name)
-            print(service_name)
-            print(service_code)
-            print(score)
-            print(usability)
-            print(usability_compare)
-            print(attitude)
-            print(attitude_compare)
-            print(stability)
-            print(stability_compare)
-            print(secure_score)
-            print(payer_number)
-            print(nearly_payer_number)
-            print(continue_rate)
-            print(refund_rate)
-            print(open_rate)
-            print(score_times)
-            print(five_score_rate)
-            print(four_score_rate)
-            print(three_score_rate)
-            print(two_score_rate)
-            print(one_score_rate)
+            # print(service_name)
+            # print(service_code)
+            # print(score)
+            # print(usability)
+            # print(usability_compare)
+            # print(attitude)
+            # print(attitude_compare)
+            # print(stability)
+            # print(stability_compare)
+            # print(secure_score)
+            # print(payer_number)
+            # print(nearly_payer_number)
+            # print(continue_rate)
+            # print(refund_rate)
+            # print(open_rate)
+            # print(score_times)
+            # print(five_score_rate)
+            # print(four_score_rate)
+            # print(three_score_rate)
+            # print(two_score_rate)
+            # print(one_score_rate)
             # print(seller_rank_percent_url)
             # print(seller_industry_percent_url)
-            print(seller_rank_percent)
-            print(seller_industry_percent)
+            # print(seller_rank_percent)
+            # print(seller_industry_percent)
             # print(user_number)
             # print(browser_number)
 
