@@ -111,53 +111,58 @@ class IsvServiceInfoSpider(RedisSpider):
                 html = requests.get(seller_rank_percent_url).text
                 selector = etree.HTML(html)
                 seller_rank_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
-                seller_rank_percent = '['
-                for seller_rank_percent_tr in seller_rank_percent_trs:
-                    seller_rank_percent_tds = seller_rank_percent_tr.xpath('td')
-                    index = 0
-                    for seller_rank_percent_td in seller_rank_percent_tds:
-                        index += 1
-                        img = seller_rank_percent_td.xpath('img/@src')
-                        if img:
-                            seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
-                        else:
-                            seller_rank = seller_rank_percent_td.xpath('text()')
-                            if seller_rank:
-                                seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
-                        if seller_rank:
-                            if index % 2 == 1:
-                                seller_rank_percent = seller_rank_percent + '{\"rank\":\"' + str(seller_rank).replace('\r',
-                                                                                                                      '') + '\",'
+                if seller_rank_percent_trs:
+                    seller_rank_percent = '['
+                    for seller_rank_percent_tr in seller_rank_percent_trs:
+                        seller_rank_percent_tds = seller_rank_percent_tr.xpath('td')
+                        index = 0
+                        for seller_rank_percent_td in seller_rank_percent_tds:
+                            index += 1
+                            img = seller_rank_percent_td.xpath('img/@src')
+                            if img:
+                                seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
                             else:
-                                seller_rank_percent = seller_rank_percent + '\"percent\":\"' + seller_rank + '\"},'
-
-                seller_rank_percent = seller_rank_percent[:-1] + ']'
+                                seller_rank = seller_rank_percent_td.xpath('text()')
+                                if seller_rank:
+                                    seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
+                            if seller_rank:
+                                if index % 2 == 1:
+                                    seller_rank_percent = seller_rank_percent + '{\"rank\":\"' + str(seller_rank).replace('\r',
+                                                                                                                          '') + '\",'
+                                else:
+                                    seller_rank_percent = seller_rank_percent + '\"percent\":\"' + seller_rank + '\"},'
+                    seller_rank_percent = seller_rank_percent[:-1] + ']'
+                else:
+                    seller_rank_percent = '[]'
                 # 爬卖家行业占比
                 html = requests.get(seller_industry_percent_url).text
                 selector = etree.HTML(html)
                 seller_industry_percent_trs = selector.xpath('//*[@id="apc-detail"]/div[2]/table/tbody/tr')
-                seller_industry_percent = '['
-                for seller_industry_percent_tr in seller_industry_percent_trs:
-                    seller_industry_percent_tds = seller_industry_percent_tr.xpath('td')
-                    index = 0
-                    for seller_industry_percent_td in seller_industry_percent_tds:
-                        index += 1
-                        img = seller_industry_percent_td.xpath('img/@src')
-                        if img:
-                            seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
-                        else:
-                            seller_rank = seller_industry_percent_td.xpath('text()')
-                            if seller_rank:
-                                seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
-                        if seller_rank:
-                            if index % 2 == 1:
-                                seller_industry_percent = seller_industry_percent + '{\"industry\":\"' + str(
-                                    seller_rank).replace(
-                                    '\r', '') + '\",'
+                if seller_industry_percent_trs:
+                    seller_industry_percent = '['
+                    for seller_industry_percent_tr in seller_industry_percent_trs:
+                        seller_industry_percent_tds = seller_industry_percent_tr.xpath('td')
+                        index = 0
+                        for seller_industry_percent_td in seller_industry_percent_tds:
+                            index += 1
+                            img = seller_industry_percent_td.xpath('img/@src')
+                            if img:
+                                seller_rank = re.search('rank/(.*?).gif', img[0]).group(1)
                             else:
-                                seller_industry_percent = seller_industry_percent + '\"percent\":\"' + seller_rank + '\"},'
+                                seller_rank = seller_industry_percent_td.xpath('text()')
+                                if seller_rank:
+                                    seller_rank = str(seller_rank[0]).replace('\t', '').replace('\n', '').replace(' ', '')
+                            if seller_rank:
+                                if index % 2 == 1:
+                                    seller_industry_percent = seller_industry_percent + '{\"industry\":\"' + str(
+                                        seller_rank).replace(
+                                        '\r', '') + '\",'
+                                else:
+                                    seller_industry_percent = seller_industry_percent + '\"percent\":\"' + seller_rank + '\"},'
 
-                seller_industry_percent = seller_industry_percent[:-1] + ']'
+                    seller_industry_percent = seller_industry_percent[:-1] + ']'
+                else:
+                    seller_industry_percent = '[]'
             else:
                 seller_rank_percent = '[]'
                 seller_industry_percent = '[]'
