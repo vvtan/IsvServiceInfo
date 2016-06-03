@@ -1,0 +1,16 @@
+setup.py
+DistributedCrawl/__init__.py
+DistributedCrawl/items.py
+DistributedCrawl/pipelines.py
+DistributedCrawl/rotate_useragent.py
+DistributedCrawl/settings.py
+DistributedCrawl/spiders/GxzfcgSpider.py
+DistributedCrawl/spiders/MySpider.py
+DistributedCrawl/spiders/__init__.py
+DistributedCrawl/spiders/factory/GxzfcgFactorySpider.py
+DistributedCrawl/spiders/factory/__init__.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
