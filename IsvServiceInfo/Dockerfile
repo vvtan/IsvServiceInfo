@@ -2,6 +2,7 @@ FROM daocloud.io/mingchuan/isv_service_info_crawler:master-0336b00
 MAINTAINER vvtan
 
 RUN mkdir -p /usr/src/app
+RUN mkdir -p /tmp/childlog
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
