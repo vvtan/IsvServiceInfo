@@ -9,6 +9,7 @@ RUN chmod 755 run.sh
 RUN cd /usr/src/app/IsvServiceInfo
 RUN cp /etc/localtime /etc/localtime.bak
 RUN ln -svf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN easy_install supervisor
 
 
 EXPOSE 6800
