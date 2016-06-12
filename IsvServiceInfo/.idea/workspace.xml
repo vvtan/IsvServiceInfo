@@ -48,8 +48,8 @@
       <file leaf-file-name="supervisord.conf" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/supervisord.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+            <state relative-caret-position="441">
+              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -156,9 +156,9 @@
         <option value="$PROJECT_DIR$/scrapy.cfg" />
         <option value="$PROJECT_DIR$/IsvServiceInfo/settings.py" />
         <option value="$PROJECT_DIR$/pushUrl.py" />
-        <option value="$PROJECT_DIR$/supervisord.conf" />
         <option value="$PROJECT_DIR$/run.sh" />
         <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/supervisord.conf" />
       </list>
     </option>
   </component>
@@ -867,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/supervisord.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+        <state relative-caret-position="441">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding />
         </state>
       </provider>
