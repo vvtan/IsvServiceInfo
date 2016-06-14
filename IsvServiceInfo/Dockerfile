@@ -6,7 +6,7 @@ RUN mkdir -p /tmp/childlog
 RUN mkdir -p /etc/supervisor/conf.d
 WORKDIR /usr/src/app
 COPY . /usr/src/app
-COPY ./IsvServiceInfo/app.conf /etc/supervisor/conf.d/app.conf
+COPY ./app.conf /etc/supervisor/conf.d/app.conf
 
 RUN chmod 755 run.sh
 RUN cd /usr/src/app/IsvServiceInfo
