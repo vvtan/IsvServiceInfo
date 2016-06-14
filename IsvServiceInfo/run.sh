@@ -1,3 +1,3 @@
 #!/bin/bash
-supervisord -c ./app.conf &
+supervisord &
 supervisorctl start app

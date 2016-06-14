@@ -13,7 +13,9 @@ RUN cd /usr/src/app/IsvServiceInfo
 RUN cp /etc/localtime /etc/localtime.bak
 RUN ln -svf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN easy_install supervisor
-
+RUN echo_supervisord_conf > /etc/supervisord.conf
+RUN echo [include] >> /etc/supervisord.conf
+RUN echo files = /etc/supervisor/conf.d/app.conf >> /etc/supervisord.conf
 
 EXPOSE 6800
 
