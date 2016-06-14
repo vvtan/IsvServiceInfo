@@ -1,3 +1,4 @@
 #!/bin/bash
-sudo supervisord -c ./app.conf &
-sudo supervisorctl start app
+scrapy crawl isv_service_info_factory &
+scrapy crawl isv_service_info &
+scrapy crawl cycle_run
