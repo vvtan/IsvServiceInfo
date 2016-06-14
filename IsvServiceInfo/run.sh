@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo service supervisor start -c ./app.conf &
+sudo service supervisor start &
 sudo supervisorctl start app
