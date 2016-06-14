@@ -56,8 +56,8 @@ class IsvServiceInfoFactorySpider(RedisSpider):
                 strnext_time = iter_time.strftime('%Y-%m-%d %H:%M:%S')
                 # print "next_iter: %s" % strnext_time
                 # Continue next iteration
-                # 1分钟检查一次
-                time.sleep(60)
                 continue
+            # 1分钟检查一次
+            time.sleep(60)
 
         # runTask(work, min=0.5)
