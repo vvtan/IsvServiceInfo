@@ -1,3 +1,3 @@
 #!/bin/bash
-supervisord -c ./app.conf &
-supervisorctl start app
+sudo service supervisor start -c ./app.conf &
+sudo supervisorctl start app
