@@ -34,17 +34,17 @@ class IsvServiceInfoFactorySpider(RedisSpider):
     def runTask(self, func, day=0, hour=0, min=0, second=0):
         # Init time
         now = datetime.now()
-        strnow = now.strftime('%Y-%m-%d %H:%M:%S')
+        strnow = now.strftime('%Y-%m-%d %H')
         # print "now:", strnow
         # First next run time
         period = timedelta(days=day, hours=hour, minutes=min, seconds=second)
         next_time = now + period
-        strnext_time = next_time.strftime('%Y-%m-%d %H:%M:%S')
+        strnext_time = next_time.strftime('%Y-%m-%d %H')
         # print "next run:", strnext_time
         while True:
             # Get system current time
             iter_now = datetime.now()
-            iter_now_time = iter_now.strftime('%Y-%m-%d %H:%M:%S')
+            iter_now_time = iter_now.strftime('%Y-%m-%d %H')
             if str(iter_now_time) == str(strnext_time):
                 # Get every start work time
                 # print "start work: %s" % iter_now_time
@@ -53,11 +53,11 @@ class IsvServiceInfoFactorySpider(RedisSpider):
                 # print "task done."
                 # Get next iteration time
                 iter_time = iter_now + period
-                strnext_time = iter_time.strftime('%Y-%m-%d %H:%M:%S')
+                strnext_time = iter_time.strftime('%Y-%m-%d %H')
                 # print "next_iter: %s" % strnext_time
                 # Continue next iteration
                 continue
             # 1分钟检查一次
-            time.sleep(60)
+            time.sleep(600)
 
         # runTask(work, min=0.5)
